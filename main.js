@@ -5,7 +5,7 @@ const container = document.querySelector(".grocery-container");
 const list = document.querySelector(".grocery-list");
 const alert = document.querySelector(".alert");
 const submitBtn = document.querySelector(".submit-btn");
-
+const clearBtn = document.querySelector(".clear-btn");
 // Düzenleme Seçenekleri
 let editElement;
 let editFlag = false; // Düzenleme modunda olup olmadığını belirtir.
@@ -13,6 +13,7 @@ let editID = ""; // Düzenleme yapılan öğenin benzersiz kimliği
 
 //! Olay İzleyicileri
 form.addEventListener("submit", addItem);
+clearBtn.addEventListener("click", clearItems);
 
 // Fonksiyonlar
 
@@ -76,6 +77,16 @@ function deleteItem(e) {
   list.removeChild(element);
 
   displayAlert("Öğe Kaldırıldı", "danger");
+}
+
+function clearItems() {
+  const items = document.querySelectorAll(".grocery-item");
+  console.log(items);
+  if (items.length > 0) {
+    items.forEach((item) => list.removeChild(item));
+  }
+  container.classList.remove("show-container"); // konteynarı gizle
+  displayAlert("Liste Boş", "danger");
 }
 
 // düzenleme fonksiyonu
